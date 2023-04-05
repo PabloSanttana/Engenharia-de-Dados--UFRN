@@ -122,7 +122,7 @@
 
 - [hub.docker](https://hub.docker.com/)
 
-#### Usando as images da primaira atividade
+#### Usando as images da <a blank href="https://github.com/PabloSanttana/Engenharia-de-Dados--UFRN/tree/master/Atividade01"> primaira atividade </a>
 
 ```bash
 # Indica a versão do Docker Compose que será utilizada
