@@ -7,7 +7,7 @@
 
 ##### Tutorial atividade com base no roteiro acima
 
-##### O projeto pode ser feito direto sua maxima ou play-with-docker
+##### O projeto pode ser feito direto sua maquina ou play-with-docker
 
 - [play-with-docker](https://labs.play-with-docker.com)
 

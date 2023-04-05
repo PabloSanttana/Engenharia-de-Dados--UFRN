@@ -7,31 +7,31 @@
 
 ##### Tutorial atividade com base no roteiro acima
 
-##### O projeto pode ser feito direto sua maxima ou play-with-docker
+##### O projeto pode ser feito direto sua maquina ou play-with-docker
 
 - [play-with-docker](https://labs.play-with-docker.com)
- 
+
 ##### CMD: do play-with-docker
 
 ```bash
 
    vim Dockerfile.client
-   
+
 ```
+
 ```python
 
     FROM python:3-slim
     WORKDIR /app
     COPY clienteTCP.py /app
     ENTRYPOINT ["python","clienteTCP.py"]
-    
-```
 
+```
 
 ```bash
 
    vim Dockerfile.server
-   
+
 ```
 
 ```python
@@ -40,10 +40,10 @@
     WORKDIR /app
     COPY servidorTCP.py /app
     ENTRYPOINT ["python","servidorTCP.py"]
-    
+
 ```
+
 #### salvar é sair CMD :wq!
-    
 
 #### Agora baixar os scripts clienteTCP.py e servidorTCP.py
 
@@ -53,13 +53,14 @@
 
 ```bash
 
-   vim servidorTCP.py 
-   
+   vim servidorTCP.py
+
 ```
+
 ```python
 
-    # SCRIPT SERVIDOR TCP (python3) # 
-    # COMO EXECUTAR? 
+    # SCRIPT SERVIDOR TCP (python3) #
+    # COMO EXECUTAR?
     # ?> python servidorTCP.py #
 
     # importacao das bibliotecas
@@ -79,13 +80,12 @@
     print ('> mensagem recebida de %s -> %s' % (addr, sentence))
     connectionSocket.close() # encerra o socket com o cliente
     serverSocket.close() # encerra o socket do servidor
-    
-````
 
- #### salvar é sair :wq!
+```
 
+#### salvar é sair :wq!
 
-```bahs 
+```bahs
     vim clienteTCP.py
 ```
 
@@ -117,7 +117,6 @@
 ```
 
 #### salvar é sair :wq!
- 
 
 ### Acesse seu dockerHub
 
@@ -133,40 +132,39 @@
 
 #### Imagem cliente:
 
-```bash 
+```bash
 
     docker build -f Dockerfile.client -t <usuario-dockerhub>/clientetcp:v1 .
-    
-``` 
+
+```
 
 #### Imagem servidor:
 
-```bash 
+```bash
 
    docker build -f Dockerfile.server -t <usuario-dockerhub>/servidortcp:v1 .
-    
-``` 
+
+```
 
 ### enviar o arquivo client
 
-```bash 
+```bash
 
   docker push <usuario-dockerhub>/clientetcp:v1
-  
-````
 
+```
 
 ### Servidor
 
-```bash 
+```bash
     docker run -p 30000:30000 -it <usuario-dockerhub>/servidortcp:v1
-    
-````
+
+```
 
 ### cliente
 
-```bash 
+```bash
 
     docker run <usuario-dockerhub>/clientetcp:v1 <ip-do-servidor>
-    
-````
+
+```
