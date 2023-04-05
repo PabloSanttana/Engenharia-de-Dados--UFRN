@@ -5,33 +5,45 @@
 
 - [Roteiro](./roteiro.docx)
 
-<h3>Tutorial atividade com base no roteiro acima<h3>
+##### Tutorial atividade com base no roteiro acima
 
-<p> O projeto pode ser feito direto sua maxima ou play-with-docker</p>
+##### O projeto pode ser feito direto sua maxima ou play-with-docker
 
 - [play-with-docker](https://labs.play-with-docker.com)
+ 
+##### CMD: do play-with-docker
 
-´´´
-CMD: do play-with-docker
+```bash
 
-vim Dockerfile.client
+   vim Dockerfile.client
+   
+```
+```python
 
-        FROM python:3-slim
-        WORKDIR /app
-        COPY clienteTCP.py /app
-        ENTRYPOINT ["python","clienteTCP.py"]
+    FROM python:3-slim
+    WORKDIR /app
+    COPY clienteTCP.py /app
+    ENTRYPOINT ["python","clienteTCP.py"]
+    
+```
 
-:wq!
 
-vim Dockerfile.server
+```bash
+
+   vim Dockerfile.server
+   
+```
+
+```python
 
     FROM python:3-slim
     WORKDIR /app
     COPY servidorTCP.py /app
     ENTRYPOINT ["python","servidorTCP.py"]
-
-:wq!
-´´´
+    
+```
+#### salvar é sair CMD :wq!
+    
 
 #### Agora baixar os scripts clienteTCP.py e servidorTCP.py
 
@@ -39,8 +51,16 @@ vim Dockerfile.server
 
 - [servidorTCP.py](https://www.dca.ufrn.br/~viegas/disciplinas/DCA0132/files/Sockets/servidorTCP.py)
 
-´´´
-vim servidorTCP.py # SCRIPT SERVIDOR TCP (python3) # # COMO EXECUTAR? # ?> python servidorTCP.py #
+```bash
+
+   vim servidorTCP.py 
+   
+```
+```python
+
+    # SCRIPT SERVIDOR TCP (python3) # 
+    # COMO EXECUTAR? 
+    # ?> python servidorTCP.py #
 
     # importacao das bibliotecas
     from socket import * # sockets
@@ -59,12 +79,17 @@ vim servidorTCP.py # SCRIPT SERVIDOR TCP (python3) # # COMO EXECUTAR? # ?> pytho
     print ('> mensagem recebida de %s -> %s' % (addr, sentence))
     connectionSocket.close() # encerra o socket com o cliente
     serverSocket.close() # encerra o socket do servidor
+    
+````
 
-:wq!
-´´´
+ #### salvar é sair :wq!
 
-´´´
-vim clienteTCP.py
+
+```bahs 
+    vim clienteTCP.py
+```
+
+```python
 
     # SCRIPT CLIENTE TCP (python3)
     #
@@ -89,8 +114,10 @@ vim clienteTCP.py
     time.sleep(2)
     clientSocket.close() # encerramento o socket do cliente
 
-:wq!
-´´´
+```
+
+#### salvar é sair :wq!
+ 
 
 ### Acesse seu dockerHub
 
@@ -104,26 +131,42 @@ vim clienteTCP.py
 
 ### Construir as imagens a partir dos arquivos Dockerfile.
 
-´´´
-Imagem cliente:
+#### Imagem cliente:
 
-docker build -f Dockerfile.client -t <usuario-dockerhub>/clientetcp:v1 .
+```bash 
 
-Imagem servidor:
+    docker build -f Dockerfile.client -t <usuario-dockerhub>/clientetcp:v1 .
+    
+``` 
 
-docker build -f Dockerfile.server -t <usuario-dockerhub>/servidortcp:v1 .
+#### Imagem servidor:
 
-docker push <usuario-dockerhub>/clientetcp:v1
-´´´
+```bash 
+
+   docker build -f Dockerfile.server -t <usuario-dockerhub>/servidortcp:v1 .
+    
+``` 
+
+### enviar o arquivo client
+
+```bash 
+
+  docker push <usuario-dockerhub>/clientetcp:v1
+  
+````
+
 
 ### Servidor
 
-´´´
-docker run -p 30000:30000 -it <usuario-dockerhub>/servidortcp:v1
-´´´
+```bash 
+    docker run -p 30000:30000 -it <usuario-dockerhub>/servidortcp:v1
+    
+````
 
 ### cliente
 
-´´´
-docker run <usuario-dockerhub>/clientetcp:v1 <ip-do-servidor>
-´´´
+```bash 
+
+    docker run <usuario-dockerhub>/clientetcp:v1 <ip-do-servidor>
+    
+````
