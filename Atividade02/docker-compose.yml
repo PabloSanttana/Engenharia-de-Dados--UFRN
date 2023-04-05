@@ -1,0 +1,55 @@
+version: "3.9"
+
+networks:
+  main-redes:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/24
+
+services:
+  servidor:
+    container_name: servidortcp
+    image: pablosantana/servidortcp:v1
+    build:
+      context: .
+      dockerfile: ./Dockerfile.server
+    networks:
+      main-redes:
+        ipv4_address: 172.18.0.2
+    ports:
+      - 30000:30000
+    tty: true
+  cliente:
+    container_name: cliente1
+    depends_on:
+      - servidor
+    image: pablosantana/clientetcp:v1
+    build:
+      context: .
+      dockerfile: ./Dockerfile.client
+    networks:
+      main-redes:
+        ipv4_address: 172.18.0.3
+
+    entrypoint: ["python", "clienteTCP.py", "172.18.0.2"]
+
+    tty: true
+    restart: always
+
+  cliente2:
+    container_name: cliente2
+    depends_on:
+      - servidor
+    image: pablosantana/clientetcp:v1
+    build:
+      context: .
+      dockerfile: ./Dockerfile.client
+    networks:
+      main-redes:
+        ipv4_address: 172.18.0.4
+
+    entrypoint: ["python", "clienteTCP.py", "172.18.0.2"]
+    tty: true
+    restart: always
