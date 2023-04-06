@@ -122,7 +122,6 @@
 
 - [hub.docker](https://hub.docker.com/)
 
-
 #### Usando as images da <a href="https://github.com/PabloSanttana/Engenharia-de-Dados--UFRN/tree/master/Atividade01" target="_blank">primaira atividade</a>
 
 ```bash
@@ -163,7 +162,7 @@ services:
     # O depends_on faz com que este serviço seja executado após outro
     depends_on:
       - servidor
-    image: pablosantana/clientetcp:v1
+    image: <nome-do-usuario-dockerhub>/clientetcp:v1
     build:
       # O caminho do diretorio que contem o dockerfile
       context: .
@@ -183,14 +182,14 @@ services:
     container_name: cliente2
     depends_on:
       - servidor
-    image: pablosantana/clientetcp:v1
+    image: <nome-do-usuario-dockerhub>/clientetcp:v1
     build:
       context: .
       dockerfile: ./Dockerfile.client
     networks:
       main-redes:
         ipv4_address: 172.18.0.4
-        
+
     entrypoint: ["python", "clienteTCP.py", "172.18.0.2"]
     tty: true
     restart: always
