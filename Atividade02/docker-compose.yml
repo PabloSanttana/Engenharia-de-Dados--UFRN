@@ -1,5 +1,7 @@
+# Indica a versão do Docker Compose que será utilizada
 version: "3.9"
-
+#No docker-compose.yml deve ser definida uma rede com a faixa de ip específica na rede 172.18.0.0/24.
+#Como sugestão, segue parte da especificação dessa rede:
 networks:
   main-redes:
     driver: bridge
@@ -7,35 +9,48 @@ networks:
       driver: default
       config:
         - subnet: 172.18.0.0/24
-
+# Serviços que serão executados nos containers
 services:
+  # Nome do serviço a ser criado
   servidor:
+      # Nome do container que será executado
     container_name: servidortcp
+    # Imagem que será executada no container
+    # A imagem é obtida localmente ou a partir do Dockerhub
     image: pablosantana/servidortcp:v1
     build:
+    # O caminho do diretorio que contem o dockerfile
       context: .
       dockerfile: ./Dockerfile.server
+    # Especificando a rede do servidor
     networks:
       main-redes:
         ipv4_address: 172.18.0.2
+    # Mapeie a porta TCP 30000 no contêiner para a porta 30000 no host do Docker.
     ports:
       - 30000:30000
+    # Permite a exibição de texto na tela do terminal
     tty: true
+
+  # Nome do segundo serviço a ser criado
   cliente:
     container_name: cliente1
+   # O depends_on faz com que este serviço seja executado após outro
     depends_on:
       - servidor
     image: pablosantana/clientetcp:v1
     build:
       context: .
       dockerfile: ./Dockerfile.client
+    # Conectando o cliente na mesma rede do servidor
     networks:
       main-redes:
         ipv4_address: 172.18.0.3
-
+    # comando a serem executados no cliente logo apos, o container ser inicializado passado ip do servidor
     entrypoint: ["python", "clienteTCP.py", "172.18.0.2"]
 
     tty: true
+    # Quando o container terminar a sua execução, sempre irá reiniciar
     restart: always
 
   cliente2:
