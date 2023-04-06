@@ -149,6 +149,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.server
+    # Especificando a rede do servidor
     networks:
       main-redes:
         ipv4_address: 172.18.0.2
@@ -164,12 +165,14 @@ services:
       - servidor
     image: pablosantana/clientetcp:v1
     build:
+      # O caminho do diretorio que contem o dockerfile
       context: .
       dockerfile: ./Dockerfile.client
+    # Conectando o cliente na mesma rede do servidor
     networks:
       main-redes:
         ipv4_address: 172.18.0.3
-
+    # comando a serem executados no cliente logo apos o container ser inicializado passado ip do servidor
     entrypoint: ["python", "clienteTCP.py", "172.18.0.2"]
 
     tty: true
@@ -187,7 +190,7 @@ services:
     networks:
       main-redes:
         ipv4_address: 172.18.0.4
-
+        
     entrypoint: ["python", "clienteTCP.py", "172.18.0.2"]
     tty: true
     restart: always
