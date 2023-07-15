@@ -82,7 +82,7 @@ Após a definição de cada uma das funções, a DAG inicia-se a partir do trech
 - BashOperator: Operador que realiza comandos bash como uma tarefa no fluxo de trabalho, nele podem ser executados comandos do sistema operacional, scripts bash ou comandos executáveis do Airflow.
 - BranchPythonOperator: Operador que executa uma função Python para determinar qual caminho seguir no fluxo de trabalho com base em uma condição, essa função irá retornar um id da próxima tarefa a ser executada.
 
-As atualizações dos dados são realizadas a cada trinta minutos, como está especificado nos argumentos padrões (default_args), lá podemos alterar a data que é iniciada o fluxo de trabalho com os dados.
+As atualizações dos dados são realizadas à cada trinta minutos, como está especificado nos argumentos padrões (default_args), lá podemos alterar a data que é iniciada o fluxo de trabalho com os dados.
 
 
 ### Resultados obtidos
