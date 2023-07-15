@@ -151,6 +151,7 @@ def gererate_html(ti):
     table_md = ti.xcom_pull(task_ids='table_md')
     table_hours_total_md = ti.xcom_pull(task_ids='table_hours_total_md')
     table_hours_qtd_md = ti.xcom_pull(task_ids='table_hours_qtd_md')
+    
     # Get the current time in the UTC time zone
     utc_now = datetime.now(pytz.utc)
 
@@ -296,11 +297,6 @@ def gererate_html(ti):
             },
             })
 
-    
-            
-
-
-    
             
         new Chart(ctx5, {
             type: 'line',
@@ -336,7 +332,7 @@ def gererate_html(ti):
     html += ','.join(labels)
     html += '],'
     html +="""datasets: [{
-                        label: 'Valor Total Pix por mes',
+                        label: 'Valor Total Pix do mes',
     """
     html += 'data: ['
     data = [f'"{item}"' for item in table_total_ano["Total"]]
@@ -359,7 +355,7 @@ def gererate_html(ti):
     html += ','.join(labels)
     html += '],'
     html +="""datasets: [{
-                        label: 'Valor Total Pix por mes',
+                        label: 'Quantidade Total Pix do mes',
     """
     html += 'data: ['
     data = [f'"{item}"' for item in table_total_ano["Quantidade"]]
